@@ -1,15 +1,23 @@
 name: First Workflow
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        default: "Stagging"
+        description: "choose env"
+        required: true
+        type: choice
+        options:
+          - Stagging
+          - production
+          - development
 jobs:
-  examole-job:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: print a welcome message
-        run: echo "welcom to my github actions"
+        run: echo "deploy app..."
 
       - name: checkout repo
         uses: actions/checkout@v6.1.0
